@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sankey</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; }
+    </style>
+</head>
+<body>
+    <div id='main' style="width: 1000px; height: 1000px;"></div>
+
+    <script>
+        var myChart = echarts.init(document.getElementById('main'), null, { renderer: 'svg' , textAsPath: false});
+
+        var option = {
+            textStyle: {
+                fontFamily: 'Arial'
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {
+                        type: 'svg',
+                        title: 'Save as SVG',
+                        pixelRatio: 1
+                    }
+                }
+            },
+            "title": {
+                "text": "",
+                "subtext": "",
+                "left": "center",
+                "top": "top"
+            },
+            "tooltip": {
+                "trigger": "item",
+                "triggerOn": "mousemove"
+            },
+            "animation": false,
+            "series": [
+                {
+            "type": "sankey",
+            "emphasis": {
+                "focus": "adjacency"
+            },
+            "nodeAlign": "center",
+            "nodeGap": 30,
+            "data": [
+                {
+                    "name": "self",
+                    "depth": 0,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "object",
+                    "depth": 0,
+                    "itemStyle": {
+                        "color": "rgb(62, 142, 169)"
+                    }
+                },
+                {
+                    "name": "social",
+                    "depth": 0,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "self-directed",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "locomotion",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(64, 116, 209)"
+                    }
+                },
+                {
+                    "name": "manipulation",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(64, 126, 193)"
+                    }
+                },
+                {
+                    "name": "ingestion",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(63, 137, 177)"
+                    }
+                },
+                {
+                    "name": "social symbolic",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(62, 147, 161)"
+                    }
+                },
+                {
+                    "name": "social interaction",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(61, 158, 145)"
+                    }
+                },
+                {
+                    "name": "social gesture",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(61, 168, 129)"
+                    }
+                },
+                {
+                    "name": "defense",
+                    "depth": 1,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                                {
+                    "name": "sports",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "resting",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(65, 109, 219)"
+                    }
+                },
+                {
+                    "name": "face",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(64, 113, 213)"
+                    }
+                },
+                {
+                    "name": "grooming",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(64, 117, 206)"
+                    }
+                },
+                {
+                    "name": "transportation",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(64, 121, 200)"
+                    }
+                },
+                {
+                    "name": "preparing food",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(64, 126, 194)"
+                    }
+                },
+                {
+                    "name": "working",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(63, 130, 188)"
+                    }
+                },
+                {
+                    "name": "housework",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(63, 134, 181)"
+                    }
+                },
+                {
+                    "name": "playing games",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(63, 138, 175)"
+                    }
+                },
+                {
+                    "name": "gardening",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(62, 142, 169)"
+                    }
+                },
+                {
+                    "name": "childcare",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(62, 146, 163)"
+                    }
+                },
+                {
+                    "name": "eating",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(62, 150, 157)"
+                    }
+                },
+                {
+                    "name": "telephoning",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(62, 154, 150)"
+                    }
+                },
+                {
+                    "name": "religious activities",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(61, 158, 144)"
+                    }
+                },
+                {
+                    "name": "socializing",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(61, 163, 138)"
+                    }
+                },
+                {
+                    "name": "studying",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(61, 167, 132)"
+                    }
+                },
+                {
+                    "name": "shopping",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(61, 171, 125)"
+                    }
+                },
+                {
+                    "name": "fighting",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(60, 175, 119)"
+                    }
+                },
+                {
+                    "name": "instructing",
+                    "depth": 2,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "bicycling",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "blocking",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "bouncing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "bowling",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "climbing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "diving",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "running",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "squatting",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "skiing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "surfing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "laying",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "sleeping",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "crying",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+                {
+                    "name": "giggling",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(65, 105, 225)"
+                    }
+                },
+
+                {
+                    "name": "spacer_for_depth1",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "transparent"
+                    },
+                    "label": {
+                        "show": false
+                    }
+                },
+                {
+                    "name": "spacer_for_depth2",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "transparent"
+                    },
+                    "label": {
+                        "show": false
+                    }
+                },
+
+
+                {
+                    "name": "applauding",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "bowing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "celebrating",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "chasing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "cheering",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "coaching",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "discussing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "hugging",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "kissing",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "shaking",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                },
+                {
+                    "name": "waving",
+                    "depth": 3,
+                    "itemStyle": {
+                        "color": "rgb(60, 179, 113)"
+                    }
+                }
+            ],
+            "links": [
+                    {
+        "source": "self",
+        "target": "ingestion",
+        "value": 8
+    },
+    {
+        "source": "self",
+        "target": "self-directed",
+        "value": 61
+    },
+    {
+        "source": "self",
+        "target": "locomotion",
+        "value": 47
+    },
+    {
+        "source": "self",
+        "target": "social symbolic",
+        "value": 13
+    },
+    {
+        "source": "social",
+        "target": "social interaction",
+        "value": 52
+    },
+    {
+        "source": "social",
+        "target": "defense",
+        "value": 16
+    },
+    {
+        "source": "social",
+        "target": "social symbolic",
+        "value": 9
+    },
+    {
+        "source": "social",
+        "target": "social gesture",
+        "value": 15
+    },
+    {
+        "source": "object",
+        "target": "manipulation",
+        "value": 134
+    },
+    {
+        "source": "social interaction",
+        "target": "shopping",
+        "value": 4
+    },
+    {
+        "source": "social interaction",
+        "target": "face",
+        "value": 1
+    },
+    {
+        "source": "social interaction",
+        "target": "sports",
+        "value": 2
+    },
+    {
+        "source": "social interaction",
+        "target": "grooming",
+        "value": 1
+    },
+    {
+        "source": "social interaction",
+        "target": "working",
+        "value": 1
+    },
+    {
+        "source": "social interaction",
+        "target": "gardening",
+        "value": 1
+    },
+    {
+        "source": "social interaction",
+        "target": "instructing",
+        "value": 3
+    },
+    {
+        "source": "social interaction",
+        "target": "playing games",
+        "value": 5
+    },
+    {
+        "source": "social interaction",
+        "target": "socializing",
+        "value": 28
+    },
+    {
+        "source": "social interaction",
+        "target": "childcare",
+        "value": 4
+    },
+    {
+        "source": "social interaction",
+        "target": "telephoning",
+        "value": 2
+    },
+    {
+        "source": "manipulation",
+        "target": "shopping",
+        "value": 1
+    },
+    {
+        "source": "manipulation",
+        "target": "sports",
+        "value": 12
+    },
+    {
+        "source": "manipulation",
+        "target": "eating",
+        "value": 1
+    },
+    {
+        "source": "manipulation",
+        "target": "grooming",
+        "value": 5
+    },
+    {
+        "source": "manipulation",
+        "target": "preparing food",
+        "value": 25
+    },
+    {
+        "source": "manipulation",
+        "target": "transportation",
+        "value": 9
+    },
+    {
+        "source": "manipulation",
+        "target": "working",
+        "value": 32
+    },
+    {
+        "source": "manipulation",
+        "target": "gardening",
+        "value": 9
+    },
+    {
+        "source": "manipulation",
+        "target": "studying",
+        "value": 2
+    },
+    {
+        "source": "manipulation",
+        "target": "fighting",
+        "value": 2
+    },
+    {
+        "source": "manipulation",
+        "target": "playing games",
+        "value": 10
+    },
+    {
+        "source": "manipulation",
+        "target": "socializing",
+        "value": 6
+    },
+    {
+        "source": "manipulation",
+        "target": "childcare",
+        "value": 2
+    },
+    {
+        "source": "manipulation",
+        "target": "telephoning",
+        "value": 2
+    },
+    {
+        "source": "manipulation",
+        "target": "housework",
+        "value": 16
+    },
+    {
+        "source": "ingestion",
+        "target": "face",
+        "value": 1
+    },
+    {
+        "source": "ingestion",
+        "target": "eating",
+        "value": 6
+    },
+    {
+        "source": "ingestion",
+        "target": "childcare",
+        "value": 1
+    },
+    {
+        "source": "self-directed",
+        "target": "face",
+        "value": 18
+    },
+    {
+        "source": "self-directed",
+        "target": "sports",
+        "value": 6
+    },
+    {
+        "source": "self-directed",
+        "target": "grooming",
+        "value": 16
+    },
+    {
+        "source": "self-directed",
+        "target": "working",
+        "value": 1
+    },
+    {
+        "source": "self-directed",
+        "target": "resting",
+        "value": 9
+    },
+    {
+        "source": "self-directed",
+        "target": "playing games",
+        "value": 5
+    },
+    {
+        "source": "self-directed",
+        "target": "socializing",
+        "value": 3
+    },
+    {
+        "source": "self-directed",
+        "target": "childcare",
+        "value": 2
+    },
+    {
+        "source": "self-directed",
+        "target": "religious activities",
+        "value": 1
+    },
+    {
+        "source": "defense",
+        "target": "sports",
+        "value": 1
+    },
+    {
+        "source": "defense",
+        "target": "working",
+        "value": 2
+    },
+    {
+        "source": "defense",
+        "target": "fighting",
+        "value": 13
+    },
+    {
+        "source": "locomotion",
+        "target": "sports",
+        "value": 25
+    },
+    {
+        "source": "locomotion",
+        "target": "transportation",
+        "value": 12
+    },
+    {
+        "source": "locomotion",
+        "target": "working",
+        "value": 1
+    },
+    {
+        "source": "locomotion",
+        "target": "playing games",
+        "value": 3
+    },
+    {
+        "source": "locomotion",
+        "target": "socializing",
+        "value": 2
+    },
+    {
+        "source": "locomotion",
+        "target": "childcare",
+        "value": 4
+    },
+    {
+        "source": "social symbolic",
+        "target": "studying",
+        "value": 13
+    },
+    {
+        "source": "social symbolic",
+        "target": "instructing",
+        "value": 1
+    },
+    {
+        "source": "social symbolic",
+        "target": "socializing",
+        "value": 4
+    },
+    {
+        "source": "social symbolic",
+        "target": "religious activities",
+        "value": 4
+    },
+    {
+        "source": "social gesture",
+        "target": "grooming",
+        "value": 1
+    },
+    {
+        "source": "social gesture",
+        "target": "transportation",
+        "value": 1
+    },
+    {
+        "source": "social gesture",
+        "target": "playing games",
+        "value": 1
+    },
+    {
+        "source": "social gesture",
+        "target": "socializing",
+        "value": 12
+    },
+                {
+                    "source": "sports",
+                    "target": "bicycling",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "blocking",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "bouncing",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "bowling",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "climbing",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "diving",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "running",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "squatting",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "skiing",
+                    "value": 4.6
+                },
+                {
+                    "source": "sports",
+                    "target": "surfing",
+                    "value": 4.6
+                },
+
+                {
+                    "source": "resting",
+                    "target": "laying",
+                    "value": 4.5
+                },
+                {
+                    "source": "resting",
+                    "target": "sleeping",
+                    "value": 4.5
+                },
+
+
+                
+                
+                {
+                    "source": "face",
+                    "target": "crying",
+                    "value": 5
+                },
+                {
+                    "source": "face",
+                    "target": "giggling",
+                    "value": 5
+                },
+
+
+                {
+                    "source": "playing games", 
+                    "target": "spacer_for_depth1",
+                    "value": 20, 
+                    "lineStyle": {
+                        "opacity": 0
+                    }
+                },
+                
+                {
+                    "source": "socializing",
+                    "target": "applauding",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "bowing",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "celebrating",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "chasing",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "cheering",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "coaching",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "discussing",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "hugging",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "kissing",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "shaking",
+                    "value": 5
+                },
+                {
+                    "source": "socializing",
+                    "target": "waving",
+                    "value": 5
+                }
+            ],
+            "label": {
+                "fontSize": 20
+            },
+            "lineStyle": {
+                "color": "source",
+                "curveness": 0.5
+            }
+            }
+            ]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
