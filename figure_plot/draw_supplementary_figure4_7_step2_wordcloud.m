@@ -4,7 +4,6 @@ close all;
 
 base_dir = pwd;
 data_dir = fullfile('data/dim_visualization');
-variable_dir = fullfile(base_dir, 'variables');
 output_dir = fullfile(data_dir, 'wordclouds_MLLM_qwen_72B');
 
 addpath(base_dir);
@@ -16,7 +15,7 @@ end
 
 load(fullfile(data_dir, 'dimlabel_answers_MLLM_qwen_72B.mat'));
 
-h = fopen(fullfile('variables/colors.txt'));
+h = fopen(fullfile('helper_functions/colors.txt'));
 col = zeros(0, 3);
 while 1
     l = fgetl(h);
