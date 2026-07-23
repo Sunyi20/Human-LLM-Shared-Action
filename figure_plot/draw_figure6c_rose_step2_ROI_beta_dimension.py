@@ -85,14 +85,7 @@ def main(args):
     for sub_id in tqdm(subject_list):
         subject = f"sub-{sub_id}"
         beta_dir = pjoin(args.beta_dir, args.model)
-        beta_subject_dir = pjoin(args.beta_dir, args.model, subject)
-        
-        all_betas_sub = np.zeros((n_voxels, args.ndims))
-        for dim_i in range(args.ndims):
-            beta_filename = pjoin(beta_subject_dir, f'{subject}_betas_dim-{dim_i+1}.dtseries.nii')
-            beta_cifti = nib.load(beta_filename)
-            all_betas_sub[:, dim_i] = beta_cifti.get_fdata()[0, :n_voxels]
-        np.save(pjoin(beta_dir, f'{subject}_encoding_betas.npy'), all_betas_sub)   
+        all_betas_sub = np.load(pjoin(beta_dir, f'{subject}_encoding_betas.npy'))   
         all_betas_sub = np.abs(all_betas_sub)
         current_sub_betas = {}
         for roi_key, roi_name in rois_to_analyze.items():
