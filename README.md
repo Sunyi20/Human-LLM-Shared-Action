@@ -68,8 +68,10 @@ below.
 
 ## Requirements
 
-The repository combines Python, MATLAB, and R. Dependencies are currently
-script-specific and are not pinned in a single environment file.
+The repository combines Python, MATLAB, and R. A full snapshot of the Python
+research environment is provided in [`requirements.txt`](requirements.txt).
+Most packages are version-pinned; packages originally exported as local Conda
+build paths were normalized to portable package names and remain unpinned.
 
 ### Python
 
@@ -130,6 +132,15 @@ python -m pip install --upgrade pip
 ```
 
 Then install the dependencies for the component you intend to use.
+
+To reproduce the full Linux/CUDA 12.4 research environment:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+For CPU-only systems or a different CUDA version, install the matching PyTorch
+build first and then install the remaining packages as needed.
 
 ## Usage
 
