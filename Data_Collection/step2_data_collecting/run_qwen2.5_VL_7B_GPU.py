@@ -172,19 +172,19 @@ class conversation_Dataset(Dataset):
                             "type": "video",
                             "video": triplet_video_paths[0],
                             "max_pixels": w1 * h1,
-                            "fps": 5,
+                            "fps": 8,
                         },
                         {
                             "type": "video",
                             "video": triplet_video_paths[1],
                             "max_pixels": w2 * h2,
-                            "fps": 5,
+                            "fps": 8,
                         },
                         {
                             "type": "video",
                             "video": triplet_video_paths[2],
                             "max_pixels": w3 * h3,
-                            "fps": 5,
+                            "fps": 8,
                         },
                         {
                             "type": "text",
