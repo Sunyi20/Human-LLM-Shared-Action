@@ -242,7 +242,7 @@ for idx, triplet in tqdm(enumerate(triplets), total=len(triplets)):
         model=model_name,
         messages=messages,
         stream=s_value,
-        temperature=0
+        temperature=1.0
     )
     reasoning_text = ""  # Store the complete reasoning content
     final_content = ""
