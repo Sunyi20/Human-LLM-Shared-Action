@@ -36,9 +36,6 @@ for subject in tqdm(subject_list, desc="Processing Subject"):
         score = mean_squared_error(pred.reshape(-1), voxels[test_index].reshape(-1))
         score_list.append(score)
 
-    indices = np.argsort(np.array(score_list))[0:100]  
-    print(indices) 
-
     output_dir = "data/pycortex/data/searchlight/LeaveOneOut/MLLM_qwen_72B/"
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(os.path.join(output_dir, subject), exist_ok=True)
