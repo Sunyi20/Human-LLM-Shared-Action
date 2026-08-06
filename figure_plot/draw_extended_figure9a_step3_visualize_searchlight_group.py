@@ -1,5 +1,4 @@
 import os
-import glob
 import argparse
 from matplotlib.ticker import FormatStrFormatter
 import nibabel as nib
@@ -44,23 +43,11 @@ def cifti_to_pycortex(cifti_data, cifti_template_path, subject_id, vmin, vmax):
 
 
 def find_npy(data_dir, subject_id):
-    for ext in ('.npy', '.csv'):
-        pattern = os.path.join(data_dir, subject_id, f'*_selected_all_searchlight_results{ext}')
-        files = sorted(glob.glob(pattern))
-        if files:
-            return files[0]
-    return None
+    path = os.path.join(data_dir, subject_id, f'{subject_id}_searchlight_r_values.npy')
+    return path if os.path.exists(path) else None
 
 def load_data(path):
-    if path.endswith('.npy'):
-        return np.load(path)
-    elif path.endswith('.csv'):
-        import pandas as pd
-        df = pd.read_csv(path)
-        numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-        value_cols = [c for c in numeric_cols if 'index' not in c.lower()]
-        data = df[value_cols[0]].values
-        return data
+    return np.load(path)
 
 
 

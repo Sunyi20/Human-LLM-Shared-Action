@@ -14,7 +14,6 @@ PYCORTEX_DIR = SCRIPT_DIR / "data" / "pycortex"
 MODELS = ["LLM_qwen_7B", "MLLM_qwen_7B", "MLLM_qwen_72B", "LLM_deepseek"]
 SUBJECTS = [f"sub-{i:02d}" for i in range(1, 31)]
 
-TOP = 50
 SEARCHLIGHT_RADII = [6]
 SEARCHLIGHT_ROOT = Path(
     os.environ.get(
@@ -172,7 +171,7 @@ def export_searchlight_csv(region_masks):
                 searchlight_file = (
                     base_data_path
                     / subject
-                    / f"{subject}_selected_50_searchlight_r_values.npy"
+                    / f"{subject}_searchlight_r_values.npy"
                 )
                 if not searchlight_file.exists():
                     continue

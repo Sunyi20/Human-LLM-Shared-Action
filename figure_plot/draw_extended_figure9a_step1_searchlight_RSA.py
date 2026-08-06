@@ -114,16 +114,31 @@ def run_surface_searchlight_analysis(subject, radius, model):
     feature_file = os.path.join(base_dir, model, f"{subject}_predicted_embedding.txt")
     fmri_file = os.path.join("data/pycortex/data/fMRI_searchlight_all_brain_per_subject", subject, "whole_brain_responses.npy")
     
-    data_fmri = np.load(fmri_file) # (720, 59412)
+    data_fmri = np.load(fmri_file)  # (720, 59412)
     data_human = np.loadtxt(feature_file)
 
+    if data_fmri.ndim != 2 or data_human.ndim != 2:
+        raise ValueError(
+            "Expected two-dimensional fMRI and feature arrays, got "
+            f"{data_fmri.shape} and {data_human.shape}."
+        )
+    if data_fmri.shape[0] != data_human.shape[0]:
+        raise ValueError(
+            "Stimulus count mismatch between fMRI responses and model features: "
+            f"{data_fmri.shape[0]} versus {data_human.shape[0]}."
+        )
+
     rsm_human = np.corrcoef(data_human)
+    upper_triangle = np.triu_indices(rsm_human.shape[0], k=1)
     neighborhood_items = list(neighborhoods.items())
 
     for idx, (vertex_idx, neighbor_indices) in enumerate(tqdm(neighborhood_items)):
-        center_voxels = data_fmri[:][:, neighbor_indices]  # shape: (n, num_neighbors)
+        center_voxels = data_fmri[:, neighbor_indices]
         rsm_center = np.corrcoef(center_voxels)
-        r, p_value = stats.pearsonr(rsm_human.flatten(), rsm_center.flatten())
+        r, p_value = stats.pearsonr(
+            rsm_human[upper_triangle],
+            rsm_center[upper_triangle],
+        )
 
         if np.isnan(r):
             raise ValueError(f"Correlation result is NaN at vertex index {vertex_idx}")
@@ -131,14 +146,14 @@ def run_surface_searchlight_analysis(subject, radius, model):
         searchlight_p_values[vertex_idx] = p_value
     reject, fdr_p_values_corrected, _, _ = multipletests(searchlight_p_values, method='fdr_bh', alpha=0.05)
 
-    output_r_file = os.path.join(output_radius, f"{subject}_selected_all_searchlight_r_values.npy")
-    output_p_file = os.path.join(output_radius, f"{subject}_selected_all_searchlight_p_values.npy")
-    output_fdr_p_file = os.path.join(output_radius, f"{subject}_selected_all_searchlight_fdr_p_values.npy") 
+    output_r_file = os.path.join(output_radius, f"{subject}_searchlight_r_values.npy")
+    output_p_file = os.path.join(output_radius, f"{subject}_searchlight_p_values.npy")
+    output_fdr_p_file = os.path.join(output_radius, f"{subject}_searchlight_fdr_p_values.npy")
     np.save(output_r_file, searchlight_results)
     np.save(output_p_file, searchlight_p_values)
     np.save(output_fdr_p_file, fdr_p_values_corrected) 
 
-    output_csv = os.path.join(output_radius, f"{subject}_selected_all_searchlight_results.csv")
+    output_csv = os.path.join(output_radius, f"{subject}_searchlight_results.csv")
     with open(output_csv, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['vertex_index', 'correlation', 'p_value', 'fdr_p_value'])

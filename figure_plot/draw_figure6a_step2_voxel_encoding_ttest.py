@@ -161,10 +161,6 @@ def load_all_subjects_data(base_path, model_name, n_subjects=30):
     for i in range(1, n_subjects + 1):
         sub_id = f"sub-{i:02d}"
         file_path = os.path.join(base_path, model_name, sub_id, f"{sub_id}_avg_pearson_r.npy")
-        if i == 17:
-            print("Skipping subject 17 as requested.")
-            continue
-        
         if os.path.exists(file_path):
             print(f"Loading {file_path}")
             data = np.load(file_path)
