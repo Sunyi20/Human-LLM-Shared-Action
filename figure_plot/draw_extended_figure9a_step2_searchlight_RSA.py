@@ -131,14 +131,14 @@ def run_surface_searchlight_analysis(subject, radius, model):
         searchlight_p_values[vertex_idx] = p_value
     reject, fdr_p_values_corrected, _, _ = multipletests(searchlight_p_values, method='fdr_bh', alpha=0.05)
 
-    output_r_file = os.path.join(output_radius, f"{subject}_selected_{top}_searchlight_r_values.npy")
-    output_p_file = os.path.join(output_radius, f"{subject}_selected_{top}_searchlight_p_values.npy")
-    output_fdr_p_file = os.path.join(output_radius, f"{subject}_selected_{top}_searchlight_fdr_p_values.npy") 
+    output_r_file = os.path.join(output_radius, f"{subject}_selected_all_searchlight_r_values.npy")
+    output_p_file = os.path.join(output_radius, f"{subject}_selected_all_searchlight_p_values.npy")
+    output_fdr_p_file = os.path.join(output_radius, f"{subject}_selected_all_searchlight_fdr_p_values.npy") 
     np.save(output_r_file, searchlight_results)
     np.save(output_p_file, searchlight_p_values)
     np.save(output_fdr_p_file, fdr_p_values_corrected) 
 
-    output_csv = os.path.join(output_radius, f"{subject}_selected_{top}_searchlight_results.csv")
+    output_csv = os.path.join(output_radius, f"{subject}_selected_all_searchlight_results.csv")
     with open(output_csv, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['vertex_index', 'correlation', 'p_value', 'fdr_p_value'])
