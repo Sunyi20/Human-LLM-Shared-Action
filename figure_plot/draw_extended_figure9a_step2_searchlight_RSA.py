@@ -97,8 +97,6 @@ def run_surface_searchlight_analysis(subject, radius, model):
     cifti_file = os.path.join(base_fmri_dir, f"{subject}/results/ses-action01_task-action_cycle-1_beta.dscalar.nii")
     left_surf_file = os.path.join(base_fmri_dir, f"{subject}/standard_fsLR_surface/{subject}.L.midthickness.32k_fs_LR.surf.gii")
     right_surf_file = os.path.join(base_fmri_dir, f"{subject}/standard_fsLR_surface/{subject}.R.midthickness.32k_fs_LR.surf.gii")
-    # template_file = '/data1/home/sunyi/large-files/Python_Objects/human_action/HAD_brain_analysis/HAD-fmri-main/validation/support_files/template.dtseries.nii'
-    top = 50
     output_dir = f"data/pycortex/data/searchlight/{model}/"
     os.makedirs(output_dir, exist_ok=True)
     output_radius = os.path.join(output_dir, f"{subject}")
@@ -119,10 +117,7 @@ def run_surface_searchlight_analysis(subject, radius, model):
     data_fmri = np.load(fmri_file) # (720, 59412)
     data_human = np.loadtxt(feature_file)
 
-
-    indices = np.load(f'data/pycortex/data/searchlight/LeaveOneOut/{model}/{subject}/indices_{subject}.npy')
-    indices = indices[:top] 
-    rsm_human = np.corrcoef(data_human[indices])
+    rsm_human = np.corrcoef(data_human)
     neighborhood_items = list(neighborhoods.items())
 
     for idx, (vertex_idx, neighbor_indices) in enumerate(tqdm(neighborhood_items)):
