@@ -121,7 +121,7 @@ def run_surface_searchlight_analysis(subject, radius, model):
     neighborhood_items = list(neighborhoods.items())
 
     for idx, (vertex_idx, neighbor_indices) in enumerate(tqdm(neighborhood_items)):
-        center_voxels = data_fmri[indices][:, neighbor_indices]  # shape: (n, num_neighbors)
+        center_voxels = data_fmri[:][:, neighbor_indices]  # shape: (n, num_neighbors)
         rsm_center = np.corrcoef(center_voxels)
         r, p_value = stats.pearsonr(rsm_human.flatten(), rsm_center.flatten())
 
