@@ -45,7 +45,7 @@ def cifti_to_pycortex(cifti_data, cifti_template_path, subject_id, vmin, vmax):
 
 def find_npy(data_dir, subject_id):
     for ext in ('.npy', '.csv'):
-        pattern = os.path.join(data_dir, subject_id, f'*_selected_50_searchlight_results{ext}')
+        pattern = os.path.join(data_dir, subject_id, f'*_selected_all_searchlight_results{ext}')
         files = sorted(glob.glob(pattern))
         if files:
             return files[0]
