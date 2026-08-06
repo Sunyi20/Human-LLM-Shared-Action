@@ -161,7 +161,7 @@ def load_all_subjects_data(base_path, model_name, n_subjects=30):
     print(f"--- Loading data for model: {model_name} ---")
     for i in range(1, n_subjects + 1):
         sub_id = f"sub-{i:02d}"
-        file_path = os.path.join(base_path, sub_id, f"{sub_id}_selected_50_searchlight_results.npy")
+        file_path = os.path.join(base_path, sub_id, f"{sub_id}_selected_all_searchlight_results.npy")
         if i == 17:
             print("Skipping subject 17 as requested.")
             continue
