@@ -13,10 +13,6 @@ LLM_qwen7B_voxel = pd.read_csv(os.path.join(base_path, "voxel_encoding_results_c
 MLLM_qwen7B_voxel = pd.read_csv(os.path.join(base_path, "voxel_encoding_results_csv/MLLM_qwen_7B_voxel_encoding_results.csv"))
 MLLM_qwen72B_voxel = pd.read_csv(os.path.join(base_path, "voxel_encoding_results_csv/MLLM_qwen_72B_voxel_encoding_results.csv"))
 
-for df in [LLM_deepseek_voxel, LLM_qwen7B_voxel, MLLM_qwen7B_voxel, MLLM_qwen72B_voxel]:
-    df.drop(index=16, inplace=True)
-    df.reset_index(drop=True, inplace=True)
-
 def reshape_model_data(model_data, model_name, method_name):
     id_col = model_data.columns[0]
     melted = model_data.melt(id_vars=[id_col], var_name='region', value_name='value')
@@ -31,11 +27,10 @@ voxel_data = pd.concat([
     reshape_model_data(MLLM_qwen72B_voxel, "Qwen2.5-VL-72B", "Voxel_Encoding")
 ])
 
-model_levels = ["Deepseek-R1", "Qwen2.5-7B", "Qwen2.5-VL-7B", "Qwen2.5-VL-72B"]
+model_levels = ["Qwen2.5-7B", "Deepseek-R1", "Qwen2.5-VL-7B", "Qwen2.5-VL-72B"]
 voxel_data['model_type'] = pd.Categorical(voxel_data['model_type'], categories=model_levels, ordered=True)
-
 comparisons = [
-    ("Deepseek-R1", "Qwen2.5-7B"),
+    ("Qwen2.5-7B", "Deepseek-R1"),
     ("Qwen2.5-VL-7B", "Qwen2.5-VL-72B"),
     ("Qwen2.5-7B", "Qwen2.5-VL-7B"),
     ("Deepseek-R1", "Qwen2.5-VL-72B")
@@ -65,7 +60,7 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
     if np.isclose(value_span, 0):
         value_span = max(abs(global_max), 0.01)
 
-    all_test_results = []
+    all_test_results = [] 
     for i, region in enumerate(regions):
         region_data = data[data['region'] == region]
         
@@ -103,7 +98,6 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
         for result in all_test_results:
             result['corrected_p'] = 1.0
             result['significant'] = False
-
     sig_annotations = []
     for result in all_test_results:
         if not result['significant']:
@@ -126,7 +120,7 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
         x_left = region_idx + model_offset[m1]
         x_right = region_idx + model_offset[m2]
         x_mid = (x_left + x_right) / 2
-
+        
         pair_idx = comparisons.index(result['pair'])
         y = global_max + value_span * (0.08 + 0.07 * pair_idx)
         
@@ -153,6 +147,7 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
     for model in model_levels:
         offset = model_offset[model]
         color = model_colors[model]
+
         positions = np.arange(n_regions) + offset
         data_by_region = [data[(data['region'] == reg) & (data['model_type'] == model)]['value'].dropna().values
                           for reg in regions]
@@ -169,7 +164,7 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
             if len(reg_values) == 0:
                 continue
             x_center = reg_idx + offset
-            jitter = np.random.uniform(-0.08, 0.08, size=len(reg_values))  
+            jitter = np.random.uniform(-0.08, 0.08, size=len(reg_values))  # jitter.width = 0.08
             ax.scatter(np.full_like(reg_values, x_center) + jitter, reg_values,
                        color=color, alpha=0.42, s=25, linewidth=0)
 
@@ -187,7 +182,6 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
     bracket_height = value_span * 0.025
     for ann in sig_annotations:
         x_left, x_right, x_mid, y, label = ann['x_left'], ann['x_right'], ann['x_mid'], ann['y'], ann['label']
-
         ax.plot([x_left, x_right], [y, y], color='black', linewidth=0.35)
         ax.plot([x_left, x_left], [y - bracket_height, y], color='black', linewidth=0.35)
         ax.plot([x_right, x_right], [y - bracket_height, y], color='black', linewidth=0.35)
@@ -222,7 +216,6 @@ def draw_comparison_plot(data, ylabel="Decoding Accuracy"):
     plt.subplots_adjust(top=0.88)
     
     return fig
-
 voxel_fig = draw_comparison_plot(voxel_data, ylabel="Encoding Performance ($r$)")
 
 os.makedirs("figures", exist_ok=True)
