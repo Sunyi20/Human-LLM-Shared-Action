@@ -273,8 +273,7 @@ python -m compileall Action_SPoSE_Learning Data_Collection figure_plot
 
 If you use this repository, please cite the accompanying manuscript:
 
-> *The shared cognitive geometry of action perception in foundation models and
-> the human brain.*
+> *The semantic geometry of action: convergence across foundation models, human behaviour and the brain.*
 
 The full bibliographic citation will be added when the manuscript record is
 available.
