@@ -1,7 +1,6 @@
 # Human–LLM Shared Action
 
-Research code for the manuscript **“The shared cognitive geometry of action
-perception in foundation models and the human brain.”**
+Research code for the paper **“The computational geometry of action: convergence across artificial intelligence, human behaviour and cortex”**
 
 This repository contains the data-collection pipeline, sparse positive
 similarity embedding (SPoSE) analyses, and figure-generation scripts used to
