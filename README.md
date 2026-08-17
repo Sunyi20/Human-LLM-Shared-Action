@@ -287,7 +287,6 @@ MATLAB utilities retain their original license files under
 
 ## License
 
-This repository does not currently include a top-level license. Unless a file
-states otherwise, no permission for reuse or redistribution is granted. See
-the license files shipped with third-party utilities for their respective
-terms.
+Original code in this repository is licensed under the [MIT License](LICENSE).
+Bundled third-party software and assets remain subject to their respective
+licenses and terms.
